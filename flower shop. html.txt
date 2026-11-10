@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower World - Fresh Flowers & Gifts Sri Lanka</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #d44869;
+            --primary-dark: #b03350;
+            --accent: #f8e1e7;
+            --bg-light: #faf8f5;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .brand-logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Top Announcement Bar */
+        .top-bar {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-icons i {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .header-icons i:hover {
+            color: var(--primary);
+        }
+
+        .cart-icon-wrapper {
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--primary);
+            color: var(--white);
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Page Section Wrapper */
+        .page-section {
+            display: none;
+            min-height: 80vh;
+        }
+
+        .page-section.active-page {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Banner (Home Page) */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        /* Product Cards Grid */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        /* Category Card (Occasions & Weddings) */
+        .category-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 300px;
+            box-shadow: var(--shadow);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .category-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            color: var(--white);
+        }
+
+        /* About Us Styling */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Contact Form */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        textarea.form-control {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Shopping Cart Modal Side Panel */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-modal.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f9f9f9;
+        }
+
+        .cart-footer {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #ccc;
+            padding: 50px 20px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .about-content, .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .cart-modal {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Top Announcement Bar -->
+    <div class="top-bar">
+        🌸 Island-wide delivery available! Free delivery on orders over Rs. 5,000 🌸
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-container">
+            <a onclick="showPage('home')" class="brand-logo">
+                <i class="fa-solid fa-spa"></i> Flower World
+            </a>
+            
+            <!-- 7 Main Navigational Pages -->
+            <nav>
+                <ul>
+                    <li><a id="nav-home" onclick="showPage('home')" class="active">Home</a></li>
+                    <li><a id="nav-collections" onclick="showPage('collections')">Collections</a></li>
+                    <li><a id="nav-occasions" onclick="showPage('occasions')">Occasions</a></li>
+                    <li><a id="nav-confectioneries" onclick="showPage('confectioneries')">Confectioneries</a></li>
+                    <li><a id="nav-weddings" onclick="showPage('weddings')">Weddings & Events</a></li>
+                    <li><a id="nav-about" onclick="showPage('about')">About Us</a></li>
+                    <li><a id="nav-contact" onclick="showPage('contact')">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-icons">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div class="cart-icon-wrapper" onclick="toggleCart()">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE 1: HOME PAGE -->
+    <section id="page-home" class="page-section active-page">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Fresh Flowers for Every Occasion</h1>
+                <p>Express your feelings with our handpicked fresh floral arrangements and custom gift hampers.</p>
+                <button class="btn" onclick="showPage('collections')">Shop Now</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="section-title">
+                <h2>Bestsellers</h2>
+                <p>Explore our most popular customer favorites</p>
+            </div>
+            <div class="grid-4">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Red Rose Bouquet">
+                    <div class="product-info">
+                        <div class="product-title">Classic Red Roses</div>
+                        <div class="product-price">Rs. 6,500.00</div>
+                        <button class="btn" onclick="addToCart('Classic Red Roses', 6500)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Lily Bouquet">
+                    <div class="product-info">
+                        <div class="product-title">Pink Lily Dream</div>
+                        <div class="product-price">Rs. 8,200.00</div>
+                        <button class="btn" onclick="addToCart('Pink Lily Dream', 8200)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Sunflowers">
+                    <div class="product-info">
+                        <div class="product-title">Sunshine Sunflowers</div>
+                        <div class="product-price">Rs. 5,500.00</div>
+                        <button class="btn" onclick="addToCart('Sunshine Sunflowers', 5500)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Mixed Bouquet">
+                    <div class="product-info">
+                        <div class="product-title">Pastel Elegance</div>
+                        <div class="product-price">Rs. 7,000.00</div>
+                        <button class="btn" onclick="addToCart('Pastel Elegance', 7000)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 2: COLLECTIONS -->
+    <section id="page-collections" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Collections</h2>
+                <p>Discover our wide selection of floral designs</p>
+            </div>
+            <div class="grid-4">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Bunches">
+                    <div class="product-info">
+                        <div class="product-title">Rose Bunches</div>
+                        <div class="product-price">Rs. 6,500.00</div>
+                        <button class="btn" onclick="addToCart('Rose Bunches', 6500)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1591886960571-74d43a9d4166?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Vase Arrangement">
+                    <div class="product-info">
+                        <div class="product-title">Luxury Glass Vase</div>
+                        <div class="product-price">Rs. 12,500.00</div>
+                        <button class="btn" onclick="addToCart('Luxury Glass Vase', 12500)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Box Arrangement">
+                    <div class="product-info">
+                        <div class="product-title">Velvet Flower Box</div>
+                        <div class="product-price">Rs. 9,800.00</div>
+                        <button class="btn" onclick="addToCart('Velvet Flower Box', 9800)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Wildflowers">
+                    <div class="product-info">
+                        <div class="product-title">Wild Meadow Mix</div>
+                        <div class="product-price">Rs. 5,900.00</div>
+                        <button class="btn" onclick="addToCart('Wild Meadow Mix', 5900)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 3: OCCASIONS -->
+    <section id="page-occasions" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shop by Occasion</h2>
+                <p>Find the perfect flowers tailored for every special moment</p>
+            </div>
+            <div class="grid-3">
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=600&q=80" alt="Birthday">
+                    <div class="category-overlay">
+                        <h3>Birthdays</h3>
+                        <p>Brighten their special day</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80" alt="Anniversary">
+                    <div class="category-overlay">
+                        <h3>Anniversaries</h3>
+                        <p>Celebrate love & milestones</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80" alt="Graduation">
+                    <div class="category-overlay">
+                        <h3>Graduations</h3>
+                        <p>Honoring achievements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 4: CONFECTIONERIES -->
+    <section id="page-confectioneries" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Cakes & Confectioneries</h2>
+                <p>Pair your flowers with delicious handcrafted treats</p>
+            </div>
+            <div class="grid-4">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Chocolate Cake">
+                    <div class="product-info">
+                        <div class="product-title">Rich Chocolate Gateau</div>
+                        <div class="product-price">Rs. 4,500.00</div>
+                        <button class="btn" onclick="addToCart('Rich Chocolate Gateau', 4500)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Strawberry Cake">
+                    <div class="product-info">
+                        <div class="product-title">Strawberry Sponge Cake</div>
+                        <div class="product-price">Rs. 4,800.00</div>
+                        <button class="btn" onclick="addToCart('Strawberry Sponge Cake', 4800)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Chocolates">
+                    <div class="product-info">
+                        <div class="product-title">Premium Truffles Box</div>
+                        <div class="product-price">Rs. 3,500.00</div>
+                        <button class="btn" onclick="addToCart('Premium Truffles Box', 3500)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 5: WEDDINGS & EVENTS -->
+    <section id="page-weddings" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Weddings & Bespoke Events</h2>
+                <p>Transforming your special day with elegant floral artistry</p>
+            </div>
+            <div class="about-content">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80" class="about-img" alt="Wedding Floral Decor">
+                <div>
+                    <h3>Bespoke Wedding Florals</h3>
+                    <p>From custom bridal bouquets to enchanting venue decorations, our expert floral designers bring your vision to life.</p>
+                    <br>
+                    <button class="btn" onclick="showPage('contact')">Inquire for Weddings</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 6: ABOUT US -->
+    <section id="page-about" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Flower World</h2>
+                <p>Our story and passion for flowers</p>
+            </div>
+            <div class="about-content">
+                <div>
+                    <h3>Pioneering Premium Florals in Sri Lanka</h3>
+                    <p>Flower World has been dedicated to delivering premium quality, sustainably sourced flowers and luxury gift arrangements across Sri Lanka for years.</p>
+                    <br>
+                    <p>Our goal is simple: to help you share emotion and create unforgettable memories through beautiful floral designs.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" class="about-img" alt="Flower Shop">
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 7: CONTACT US -->
+    <section id="page-contact" class="page-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>We'd love to hear from you</p>
+            </div>
+            <div class="contact-wrapper">
+                <div>
+                    <h3>Get In Touch</h3>
+                    <p><i class="fa-solid fa-location-dot"></i> No. 123, Galle Road, Colombo 03, Sri Lanka</p>
+                    <p><i class="fa-solid fa-phone"></i> +94 11 234 5678 / +94 77 123 4567</p>
+                    <p><i class="fa-solid fa-envelope"></i> info@flowerworld.lk</p>
+                </div>
+                <form onsubmit="handleContactSubmit(event)">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Modal Drawer -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-header">
+            <h3>Your Shopping Cart</h3>
+            <i class="fa-solid fa-xmark" style="cursor: pointer;" onclick="toggleCart()"></i>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items dynamically added by JavaScript -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">Rs. 0.00</span>
+            </div>
+            <button class="btn" style="width: 100%;" onclick="checkout()">Checkout Now</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Flower World</h4>
+                <p>Island-wide delivery of premium fresh flowers and gift arrangements.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a onclick="showPage('home')">Home</a></li>
+                    <li><a onclick="showPage('collections')">Collections</a></li>
+                    <li><a onclick="showPage('weddings')">Weddings</a></li>
+                    <li><a onclick="showPage('contact')">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Customer Care</h4>
+                <ul>
+                    <li><a>Privacy Policy</a></li>
+                    <li><a>Terms & Conditions</a></li>
+                    <li><a>Delivery Information</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Flower World. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Shopping Cart Data Array
+        let cart = [];
+
+        // Single Page Navigation Logic (Switches among 7 main sections)
+        function showPage(pageId) {
+            // Hide all sections
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active-page'));
+
+            // Deactivate all navigation header links
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // Display target page section
+            const selectedPage = document.getElementById('page-' + pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active-page');
+            }
+
+            // Highlight target header link
+            const activeNav = document.getElementById('nav-' + pageId);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            // Smooth scroll to top of page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Shopping Cart Slide Panel
+        function toggleCart() {
+            document.getElementById('cart-modal').classList.toggle('open');
+        }
+
+        // Add Product Item to Cart
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            updateCartUI();
+            toggleCart();
+        }
+
+        // Update Cart Display & Total Calculation
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+
+            cartCount.innerText = cart.length;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: #888;">Your cart is empty.</p>';
+                cartTotalPrice.innerText = 'Rs. 0.00';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="cart-item">
+                        <div>
+                            <h4>${item.title}</h4>
+                            <small>Rs. ${item.price.toLocaleString()}.00</small>
+                        </div>
+                        <i class="fa-solid fa-trash" style="color: red; cursor: pointer;" onclick="removeFromCart(${index})"></i>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = html;
+            cartTotalPrice.innerText = `Rs. ${total.toLocaleString()}.00`;
+        }
+
+        // Remove Single Item from Cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Checkout Action Trigger
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add items to proceed.');
+                return;
+            }
+            alert('Thank you! Your order has been placed successfully.');
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        // Form Submit Handler
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for contacting Flower World. We will get back to you shortly!');
+        }
+    </script>
+</body>
+</html>
